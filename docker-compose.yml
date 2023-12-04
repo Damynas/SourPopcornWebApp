@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - NODE_ENV=development
+      - VITE_API_URL=https://localhost:8081
     ports:
       - '7070:7070'
     volumes:
