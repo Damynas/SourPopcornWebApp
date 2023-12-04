@@ -195,7 +195,7 @@ const CreateUserDialog = (props: ICreateUserDialogProps) => {
       });
     }
 
-    (form.roles.value as IFormValue[]).map((role, index) => {
+    (form.roles.value as IFormValue[]).forEach((role, index) => {
       if (!role.value) {
         validationErrors.push({
           propertyName: `role[${index}]`,
@@ -328,6 +328,7 @@ const CreateUserDialog = (props: ICreateUserDialogProps) => {
               error={role.errorMessage !== ''}
               helperText={role.errorMessage}
               removeMargin
+              required
             />
           ))}
         </Repeater>

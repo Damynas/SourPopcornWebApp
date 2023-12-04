@@ -309,7 +309,7 @@ const EditUserDialog = (props: IEditUserDialogProps) => {
             {(form.roles.value as IFormValue[]).map((role, index) => (
               <Select
                 key={index}
-                label=''
+                label='Role'
                 name={`role[${index}]`}
                 placeholder='Select Role'
                 inputSize='sm'
@@ -319,6 +319,7 @@ const EditUserDialog = (props: IEditUserDialogProps) => {
                 error={role.errorMessage !== ''}
                 helperText={role.errorMessage}
                 removeMargin
+                required
               />
             ))}
           </Repeater>

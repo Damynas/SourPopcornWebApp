@@ -263,7 +263,7 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
       });
     }
 
-    (form.writers.value as IFormValue[]).map((writer, index) => {
+    (form.writers.value as IFormValue[]).forEach((writer, index) => {
       if (!writer.value) {
         validationErrors.push({
           propertyName: `writer[${index}]`,
@@ -272,7 +272,7 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
       }
     });
 
-    (form.actors.value as IFormValue[]).map((actor, index) => {
+    (form.actors.value as IFormValue[]).forEach((actor, index) => {
       if (!actor.value) {
         validationErrors.push({
           propertyName: `actor[${index}]`,
@@ -333,7 +333,7 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
     return (
       directors.find(
         (director) => director.id.toString() === (option as string)
-      )?.name || (option as string)
+      )?.name ?? (option as string)
     );
   };
 
@@ -384,8 +384,8 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
           options={getDirectorOptions()}
           getOptionLabel={getOptionLabel}
           onChange={handleSelectChange}
-          error={(form.directorId.errorMessage as string) !== ''}
-          helperText={form.directorId.errorMessage as string}
+          error={form.directorId.errorMessage !== ''}
+          helperText={form.directorId.errorMessage}
         />
         <TextField
           label='Country'

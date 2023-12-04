@@ -40,7 +40,8 @@ const Select = (props: ISelectProps) => {
     error = false,
     helperText = '',
     readOnly = false,
-    removeMargin = false
+    removeMargin = false,
+    required = false
   } = props;
   return (
     <SelectBase
@@ -66,6 +67,7 @@ const Select = (props: ISelectProps) => {
           error={error}
           helperText={helperText}
           removeMargin={removeMargin}
+          required={required}
           {...props}
         />
       )}
@@ -86,6 +88,7 @@ interface ISelectProps {
   helperText?: string;
   readOnly?: boolean;
   removeMargin?: boolean;
+  required?: boolean;
 }
 
 export default Select;

@@ -40,9 +40,7 @@ const ErrorPage = (props: IErrorPageProps): ReactElement => {
         >
           <Image src={AstronautImage} />
           <Typography variant='h3' color={theme.sour.colors.purple.main}>
-            {`${statusCode}  ${
-              message ? message : getStatusMessage(statusCode)
-            }`}
+            {`${statusCode}  ${message || getStatusMessage(statusCode)}`}
           </Typography>
         </Stack>
       </Box>
