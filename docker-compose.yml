@@ -1,7 +1,13 @@
 version: '3.8'
 
+networks:
+  sourpopcorn-webapp-network:
+    driver: bridge
+
 services:
   sourpopcorn-webapp:
+    image: docker.io/library/webapp
+    container_name: webapp
     build:
       context: .
       dockerfile: Dockerfile
