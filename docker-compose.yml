@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  sourpopcorn-webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7070:7070'
+    volumes:
+      - .:/usr/src/app
+    command: ['pnpm', 'run', 'dev']

@@ -1,5 +1,5 @@
 export default {
-  apiUrl: 'https://localhost:8081/api',
+  apiUrl: import.meta.env.VITE_API_URL,
   requestConfig: {
     withCredentials: true
   }
