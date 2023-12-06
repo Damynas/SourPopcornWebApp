@@ -15,6 +15,7 @@ services:
       - VITE_API_URL=https://localhost:8081
     ports:
       - '7070:7070'
+    restart: always
     volumes:
       - .:/usr/src/app
     command: ['pnpm', 'run', 'dev']
