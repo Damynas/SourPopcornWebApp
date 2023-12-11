@@ -1,5 +1,5 @@
+import { type IEntity } from './i-entity';
 import { UserRole } from '../../../constants';
-import { IEntity } from './i-entity';
 
 export interface IUserDto extends IEntity {
   username: string;

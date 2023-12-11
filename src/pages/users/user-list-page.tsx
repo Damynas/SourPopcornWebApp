@@ -120,10 +120,10 @@ const UserListPage = () => {
           <TableCell variant='head' align='left' width='200px'>
             Roles
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Created On
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Modified On
           </TableCell>
           <TableCell variant='head' align='right' width='100px'></TableCell>
@@ -146,10 +146,10 @@ const UserListPage = () => {
             <TableCell variant='body' align='left' width='200px'>
               {user.roles.join(', ')}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(user.createdOn)}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(user.modifiedOn)}
             </TableCell>
             {renderActions(user.id)}

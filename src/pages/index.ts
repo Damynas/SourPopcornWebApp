@@ -3,4 +3,5 @@ export * from './error';
 export * from './home';
 export * from './landing';
 export * from './loading';
+export * from './movies';
 export * from './users';

@@ -13,7 +13,7 @@ import Pluralize from 'pluralize';
 import { Button } from '../..';
 
 const Container = styled(Stack)(() => ({
-  minWidth: '80%',
+  width: '80%',
   margin: '3rem'
 }));
 

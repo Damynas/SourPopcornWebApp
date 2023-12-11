@@ -4,7 +4,6 @@ import {
   styled
 } from '@mui/material';
 
-const defaultInputSize = 'md';
 const defaultSize = 'small';
 
 const getInputWidth = (inputSize?: string) => {
@@ -26,7 +25,9 @@ const TextFieldBase = styled(MaterialTextField, {
   shouldForwardProp: (prop) => prop !== 'inputSize' && prop !== 'removeMargin'
 })<{ inputSize?: string; removeMargin?: boolean }>(
   ({ theme, error, inputSize, removeMargin }) => ({
-    'width': getInputWidth(inputSize),
+    ...(inputSize && {
+      width: getInputWidth(inputSize)
+    }),
     ...(!removeMargin && {
       margin: '0.5rem'
     }),
@@ -66,17 +67,13 @@ const TextFieldBase = styled(MaterialTextField, {
 );
 
 const TextField = (props: ITextFieldProps) => {
-  const {
-    inputSize = defaultInputSize,
-    removeMargin = false,
-    children,
-    ...rest
-  } = props;
+  const { inputSize, removeMargin = false, children, ...rest } = props;
   return (
     <TextFieldBase
       inputSize={inputSize}
       removeMargin={removeMargin}
       {...rest}
+      fullWidth={!inputSize}
       size={defaultSize}
     >
       {children}

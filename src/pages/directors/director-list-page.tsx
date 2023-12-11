@@ -120,13 +120,13 @@ const DirectorListPage = () => {
           <TableCell variant='head' align='left' width='200px'>
             Country
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Born On
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Created On
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Modified On
           </TableCell>
           {hasRole(user, UserRole.MODERATOR) && (
@@ -148,13 +148,13 @@ const DirectorListPage = () => {
             <TableCell variant='body' align='left' width='200px'>
               {director.country}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(director.bornOn)}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(director.createdOn)}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(director.modifiedOn)}
             </TableCell>
             {hasRole(user, UserRole.MODERATOR) && renderActions(director.id)}

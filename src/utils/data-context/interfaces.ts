@@ -1,7 +1,7 @@
 import { SnackbarVariant } from '../../components/feedback/use-snackbar';
 
 export interface IUser {
-  id: number;
+  userId: number;
   roles: string[];
 }
 

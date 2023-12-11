@@ -22,6 +22,10 @@ const initialForm = {
     value: '',
     errorMessage: ''
   },
+  posterLink: {
+    value: '',
+    errorMessage: ''
+  },
   description: {
     value: '',
     errorMessage: ''
@@ -89,6 +93,10 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
       setForm({
         title: {
           value: movie.title,
+          errorMessage: ''
+        },
+        posterLink: {
+          value: movie.posterLink,
           errorMessage: ''
         },
         description: {
@@ -234,14 +242,15 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
         return;
       }
       const request = {
-        Title: (form.title.value as string).trim(),
-        Description: (form.description.value as string).trim(),
-        DirectorId: (form.directorId.value as string).trim(),
-        Country: (form.country.value as string).trim(),
-        Language: (form.language.value as string).trim(),
-        ReleasedOn: (form.releasedOn.value as string).trim(),
-        Writers: (form.writers.value as IFormValue[]).map((w) => w.value),
-        Actors: (form.actors.value as IFormValue[]).map((a) => a.value)
+        title: (form.title.value as string).trim(),
+        description: (form.description.value as string).trim(),
+        posterLink: (form.posterLink.value as string).trim(),
+        directorId: (form.directorId.value as string).trim(),
+        country: (form.country.value as string).trim(),
+        language: (form.language.value as string).trim(),
+        releasedOn: (form.releasedOn.value as string).trim(),
+        writers: (form.writers.value as IFormValue[]).map((w) => w.value),
+        actors: (form.actors.value as IFormValue[]).map((a) => a.value)
       };
       editMovie.update(request, apiData.requestConfig);
     }
@@ -405,6 +414,7 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
     return (
       movie?.title !== form.title.value ||
       movie?.description !== form.description.value ||
+      movie?.posterLink !== form.posterLink.value ||
       movie?.directorId.toString() !== form.directorId.value ||
       movie?.country !== form.country.value ||
       formatDate(movie?.releasedOn) !== form.releasedOn.value ||
@@ -470,6 +480,15 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
             onChange={handleChange}
             error={form.description.errorMessage !== ''}
             helperText={form.description.errorMessage}
+          />
+          <TextField
+            label='Poster Link'
+            name='posterLink'
+            inputSize='md'
+            value={form.posterLink.value}
+            onChange={handleChange}
+            error={form.posterLink.errorMessage !== ''}
+            helperText={form.posterLink.errorMessage}
           />
           <Select
             label='Director'

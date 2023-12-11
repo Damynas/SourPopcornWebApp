@@ -23,11 +23,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import CreateMovieDialog from './create-movie-dialog';
 import EditMovieDialog from './edit-movie-dialog';
 import DeleteMovieDialog from './delete-movie-dialog';
+import { useNavigate } from 'react-router-dom';
 
 const MovieListPage = () => {
   const { apiData, user, openSnackbar } = useContext(
     DataContext
   ) as IDataContext;
+  const navigate = useNavigate();
 
   const [movies, setMovies] = useState<IMovieDto[]>([]);
   const [movieId, setMovieId] = useState<number | null>(null);
@@ -154,13 +156,16 @@ const MovieListPage = () => {
           <TableCell variant='head' align='left' width='200px'>
             Director
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
+            Sour Popcorns
+          </TableCell>
+          <TableCell variant='head' align='right' width='100px'>
             Released On
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Created On
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='right' width='100px'>
             Modified On
           </TableCell>
           {hasRole(user, UserRole.MODERATOR) && (
@@ -175,7 +180,10 @@ const MovieListPage = () => {
     return (
       <TableBody key='count-rows'>
         {movies.map((movie) => (
-          <TableRow key={movie.id}>
+          <TableRow
+            key={movie.id}
+            onClick={() => navigate(`/movies/${movie.id}`)}
+          >
             <TableCell variant='body' align='left' width='200px'>
               {movie.title}
             </TableCell>
@@ -188,13 +196,16 @@ const MovieListPage = () => {
                   ?.name
               }
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
+              {movie.sourPopcorns}
+            </TableCell>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(movie.releasedOn)}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(movie.createdOn)}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='right' width='100px'>
               {formatDate(movie.modifiedOn)}
             </TableCell>
             {hasRole(user, UserRole.MODERATOR) && renderActions(movie.id)}

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { AppBar, Stack, Typography, styled } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import TheatersIcon from '@mui/icons-material/Theaters';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button, IconButton } from '..';
 import { Popover } from '../utils';
 import { HttpStatus, PageName, UserRole } from '../../constants';
@@ -94,16 +93,6 @@ const ApplicationBar = (props: IApplicationBarProps) => {
   };
   const handleMenuClose = () => {
     setMenuAnchor(null);
-  };
-
-  const [profileMenuAnchor, setProfileMenuAnchor] = useState<Element | null>(
-    null
-  );
-  const handleProfileMenuButtonClick = (target: Element | null) => {
-    setProfileMenuAnchor(target);
-  };
-  const handleProfileMenuClose = () => {
-    setProfileMenuAnchor(null);
   };
 
   const handleLogoClick = () => {
@@ -215,34 +204,13 @@ const ApplicationBar = (props: IApplicationBarProps) => {
       <Container direction='row' justifyContent='flex-end' spacing={0.5}>
         {!onlyLogo &&
           (authenticated ? (
-            <>
-              <IconButton
-                onClick={(event: SyntheticEvent<Element>) =>
-                  handleProfileMenuButtonClick(event.currentTarget)
-                }
-              >
-                <AccountCircleIcon />
-              </IconButton>
-              <Popover
-                open={Boolean(profileMenuAnchor)}
-                anchor={profileMenuAnchor}
-                onClose={handleProfileMenuClose}
-              >
-                <Container
-                  justifyContent='center'
-                  alignItems='center'
-                  spacing={0.5}
-                >
-                  <Button
-                    variant='text'
-                    onClick={handleSignOutButtonClick}
-                    loading={signOut.loading}
-                  >
-                    Sign Out
-                  </Button>
-                </Container>
-              </Popover>
-            </>
+            <Button
+              variant='outlined'
+              onClick={handleSignOutButtonClick}
+              loading={signOut.loading}
+            >
+              Sign Out
+            </Button>
           ) : (
             <>
               <Button

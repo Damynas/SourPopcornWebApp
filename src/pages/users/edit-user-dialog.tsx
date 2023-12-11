@@ -176,8 +176,8 @@ const EditUserDialog = (props: IEditUserDialogProps) => {
         return;
       }
       const request = {
-        DisplayName: (form.displayName.value as string).trim(),
-        Roles: (form.roles.value as IFormValue[]).map((r) => r.value)
+        displayName: (form.displayName.value as string).trim(),
+        roles: (form.roles.value as IFormValue[]).map((r) => r.value)
       };
       editUser.update(request, apiData.requestConfig);
     }

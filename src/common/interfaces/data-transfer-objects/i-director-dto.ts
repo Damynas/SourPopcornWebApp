@@ -1,4 +1,4 @@
-import { IEntity } from './i-entity';
+import { type IEntity } from './i-entity';
 
 export interface IDirectorDto extends IEntity {
   name: string;

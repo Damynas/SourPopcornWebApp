@@ -19,6 +19,10 @@ const initialForm = {
     value: '',
     errorMessage: ''
   },
+  posterLink: {
+    value: '',
+    errorMessage: ''
+  },
   description: {
     value: '',
     errorMessage: ''
@@ -154,14 +158,15 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
   const handleCreateMovieButtonClick = () => {
     if (!checkForErrors()) {
       const request = {
-        Title: (form.title.value as string).trim(),
-        Description: (form.description.value as string).trim(),
-        DirectorId: (form.directorId.value as string).trim(),
-        Country: (form.country.value as string).trim(),
-        Language: (form.language.value as string).trim(),
-        ReleasedOn: (form.releasedOn.value as string).trim(),
-        Writers: (form.writers.value as IFormValue[]).map((w) => w.value),
-        Actors: (form.actors.value as IFormValue[]).map((a) => a.value)
+        title: (form.title.value as string).trim(),
+        description: (form.description.value as string).trim(),
+        posterLink: (form.posterLink.value as string).trim(),
+        directorId: parseInt((form.directorId.value as string).trim()),
+        country: (form.country.value as string).trim(),
+        language: (form.language.value as string).trim(),
+        releasedOn: (form.releasedOn.value as string).trim(),
+        writers: (form.writers.value as IFormValue[]).map((w) => w.value),
+        actors: (form.actors.value as IFormValue[]).map((a) => a.value)
       };
       createMovie.save(request, apiData.requestConfig);
     }
@@ -374,6 +379,15 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
           onChange={handleChange}
           error={form.description.errorMessage !== ''}
           helperText={form.description.errorMessage}
+        />
+        <TextField
+          label='Poster Link'
+          name='posterLink'
+          inputSize='md'
+          value={form.posterLink.value}
+          onChange={handleChange}
+          error={form.posterLink.errorMessage !== ''}
+          helperText={form.posterLink.errorMessage}
         />
         <Select
           label='Director'

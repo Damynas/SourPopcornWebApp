@@ -4,11 +4,12 @@ import {
   ErrorPage,
   HomePage,
   LandingPage,
+  MovieListPage,
+  MoviePage,
   UserListPage
 } from '../../pages';
 import { IPageProps } from '..';
 import { HttpStatus, UserRole } from '../../constants';
-import { MovieListPage } from '../../pages/movies';
 
 interface IRoute {
   key: string;
@@ -36,7 +37,7 @@ const routes: IRoute[] = [
     component: <HomePage />
   },
   {
-    key: 'user-page-route',
+    key: 'user-list-page-route',
     path: '/users',
     enabled: true,
     protected: true,
@@ -44,7 +45,7 @@ const routes: IRoute[] = [
     component: <UserListPage />
   },
   {
-    key: 'movie-page-route',
+    key: 'movie-list-page-route',
     path: '/movies',
     enabled: true,
     protected: true,
@@ -52,7 +53,15 @@ const routes: IRoute[] = [
     component: <MovieListPage />
   },
   {
-    key: 'director-page-route',
+    key: 'movie-page-route',
+    path: '/movies/:id?',
+    enabled: true,
+    protected: true,
+    role: UserRole.USER,
+    component: <MoviePage />
+  },
+  {
+    key: 'director-list-page-route',
     path: '/directors',
     enabled: true,
     protected: true,

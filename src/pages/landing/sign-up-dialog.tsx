@@ -59,9 +59,9 @@ const SignUpDialog = (props: ISignUpDialogProps) => {
   const handleSignUpButtonClick = () => {
     if (!checkForSignUpErrors()) {
       const request = {
-        Username: credentials.username.value.trim(),
-        Password: credentials.password.value.trim(),
-        DisplayName: credentials.displayName.value.trim()
+        username: credentials.username.value.trim(),
+        password: credentials.password.value.trim(),
+        displayName: credentials.displayName.value.trim()
       };
       signUp.save(request, apiData.requestConfig);
     }

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Page } from '../../components';
+import { Box } from '@mui/material';
 import { useAuth } from '../../utils';
+import { Image, Page } from '../../components';
 import { LoadingPage, SignInDialog, SignUpDialog } from '..';
+import PopcornImage from '../../assets/images/popcorn.png';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -43,6 +45,14 @@ const LandingPage = () => {
       onSignUpButtonClick={changeSignUpFormDialogState}
     >
       <>
+        <Box
+          height='100%'
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Image src={PopcornImage} />
+        </Box>
         {signInFormDialogOpen && (
           <SignInDialog onClose={changeSignInFormDialogState} />
         )}

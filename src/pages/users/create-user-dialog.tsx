@@ -117,10 +117,10 @@ const CreateUserDialog = (props: ICreateUserDialogProps) => {
   const handleCreateUserButtonClick = () => {
     if (!checkForErrors()) {
       const request = {
-        Username: (form.username.value as string).trim(),
-        Password: (form.password.value as string).trim(),
-        DisplayName: (form.displayName.value as string).trim(),
-        Roles: (form.roles.value as IFormValue[]).map((r) => r.value)
+        username: (form.username.value as string).trim(),
+        password: (form.password.value as string).trim(),
+        displayName: (form.displayName.value as string).trim(),
+        roles: (form.roles.value as IFormValue[]).map((r) => r.value)
       };
       createUser.save(request, apiData.requestConfig);
     }

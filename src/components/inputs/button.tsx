@@ -61,13 +61,24 @@ const GreyLoader = styled(CircularProgress)(({ theme }) => ({
   color: theme.sour.colors.grey.dark
 }));
 
+const handleButtonClick = (
+  event: SyntheticEvent<Element>,
+  onClick?: (event: SyntheticEvent<Element>) => void | (() => void)
+) => {
+  event.stopPropagation();
+  if (onClick) {
+    onClick(event);
+  }
+};
+
 const renderButton = (buttonProps: IButtonProps) => {
   const {
     variant = defaultVariant,
     size = defaultSize,
     selected,
-    children,
     loading,
+    onClick,
+    children,
     ...rest
   } = buttonProps;
   switch (variant) {
@@ -78,6 +89,7 @@ const renderButton = (buttonProps: IButtonProps) => {
           size={size}
           selected={selected}
           loading={loading}
+          onClick={(event) => handleButtonClick(event, onClick)}
           disableRipple
           disableElevation
           {...rest}
@@ -91,6 +103,7 @@ const renderButton = (buttonProps: IButtonProps) => {
           variant={variant}
           size={size}
           loading={loading}
+          onClick={(event) => handleButtonClick(event, onClick)}
           disableRipple
           disableElevation
           {...rest}
@@ -104,6 +117,7 @@ const renderButton = (buttonProps: IButtonProps) => {
           variant={variant}
           size={size}
           loading={loading}
+          onClick={(event) => handleButtonClick(event, onClick)}
           disableRipple
           disableElevation
           {...rest}

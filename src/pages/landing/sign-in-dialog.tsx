@@ -59,8 +59,8 @@ const SignInDialog = (props: ISignInDialogProps) => {
     setSignInFormDialogErrorMessage('');
     if (!checkForSignInErrors()) {
       const request = {
-        Username: credentials.username.value.trim(),
-        Password: credentials.password.value.trim()
+        username: credentials.username.value.trim(),
+        password: credentials.password.value.trim()
       };
       signIn.save(request, apiData.requestConfig);
     }

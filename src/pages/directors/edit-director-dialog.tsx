@@ -120,9 +120,9 @@ const EditDirectorDialog = (props: IEditDirectorDialogProps) => {
         return;
       }
       const request = {
-        Name: form.name.value.trim(),
-        Country: form.country.value.trim(),
-        BornOn: form.bornOn.value.trim()
+        name: form.name.value.trim(),
+        country: form.country.value.trim(),
+        bornOn: form.bornOn.value.trim()
       };
       editDirector.update(request, apiData.requestConfig);
     }
