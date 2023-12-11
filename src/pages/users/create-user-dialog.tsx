@@ -3,7 +3,11 @@ import { Stack } from '@mui/material';
 import { FormDialog, Repeater, Select, TextField } from '../../components';
 import { DataContext, type IDataContext, useSave } from '../../utils';
 import { HttpStatus, UserRole } from '../../constants';
-import { type IFormValue, type IApiErrorResponse } from '../../common';
+import {
+  type IFormValue,
+  type IApiErrorResponse,
+  type IUserDto
+} from '../../common';
 
 const initialForm = {
   username: {
@@ -32,7 +36,7 @@ const initialForm = {
 const roles = [UserRole.USER, UserRole.MODERATOR, UserRole.ADMIN];
 
 const CreateUserDialog = (props: ICreateUserDialogProps) => {
-  const { onClose } = props;
+  const { onClose, onCreated } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -129,7 +133,7 @@ const CreateUserDialog = (props: ICreateUserDialogProps) => {
   if (createUser.response) {
     if (createUser.response.status === HttpStatus.CREATED_AT_ROUTE) {
       openSnackbar('User Created Successfully');
-      onClose();
+      onCreated(createUser.response.data.resource);
     }
     createUser.clearResponse();
   }
@@ -339,6 +343,7 @@ const CreateUserDialog = (props: ICreateUserDialogProps) => {
 
 interface ICreateUserDialogProps {
   onClose: () => void;
+  onCreated: (user: IUserDto) => void;
 }
 
 export default CreateUserDialog;

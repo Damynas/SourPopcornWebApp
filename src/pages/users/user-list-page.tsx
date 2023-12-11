@@ -70,7 +70,11 @@ const UserListPage = () => {
 
   const onCreateUserFormDialogClose = () => {
     changeCreateUserFormDialogState();
-    getUsers(apiData.requestConfig);
+  };
+
+  const onUserCreated = (user: IUserDto) => {
+    setUsers([...users, user]);
+    onCreateUserFormDialogClose();
   };
 
   const [editUserFormDialogOpen, setEditUserFormDialogOpen] =
@@ -87,7 +91,12 @@ const UserListPage = () => {
   const onEditUserFormDialogClose = () => {
     setUserId(null);
     changeEditUserFormDialogState();
-    getUsers(apiData.requestConfig);
+  };
+
+  const onUserEdited = (user: IUserDto) => {
+    const updatedUsers = users.map((u) => (u.id === user.id ? user : u));
+    setUsers(updatedUsers);
+    onEditUserFormDialogClose();
   };
 
   const [deleteUserConfirmDialogOpen, setDeleteUserConfirmDialogOpen] =
@@ -104,7 +113,12 @@ const UserListPage = () => {
   const onDeleteUserConfirmDialogClose = () => {
     setUserId(null);
     changeDeleteUserConfirmDialogState();
-    getUsers(apiData.requestConfig);
+  };
+
+  const onUserDeleted = () => {
+    const updatedUsers = users.filter((u) => u.id !== userId);
+    setUsers(updatedUsers);
+    onDeleteUserConfirmDialogClose();
   };
 
   const renderHeader = () => {
@@ -199,15 +213,23 @@ const UserListPage = () => {
         {renderHeader()}
         {renderBody()}
         {createUserFormDialogOpen && (
-          <CreateUserDialog onClose={onCreateUserFormDialogClose} />
+          <CreateUserDialog
+            onClose={onCreateUserFormDialogClose}
+            onCreated={onUserCreated}
+          />
         )}
         {editUserFormDialogOpen && userId && (
-          <EditUserDialog id={userId} onClose={onEditUserFormDialogClose} />
+          <EditUserDialog
+            id={userId}
+            onClose={onEditUserFormDialogClose}
+            onEdited={onUserEdited}
+          />
         )}
         {deleteUserConfirmDialogOpen && userId && (
           <DeleteUserDialog
             id={userId}
             onClose={onDeleteUserConfirmDialogClose}
+            onDeleted={onUserDeleted}
           />
         )}
       </Table>

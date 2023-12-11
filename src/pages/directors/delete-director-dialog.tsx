@@ -7,7 +7,7 @@ const confirmationMessage =
   'Are you sure that you want to delete this director?';
 
 const DeleteDirectorDialog = (props: IDeleteDirectorDialogProps) => {
-  const { onClose, id } = props;
+  const { id, onClose, onDeleted } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -20,7 +20,7 @@ const DeleteDirectorDialog = (props: IDeleteDirectorDialogProps) => {
   if (deleteDirector.response) {
     if (deleteDirector.response.status === HttpStatus.NO_CONTENT) {
       openSnackbar('Director Deleted Successfully');
-      onClose();
+      onDeleted();
     }
     deleteDirector.clearResponse();
   }
@@ -48,8 +48,9 @@ const DeleteDirectorDialog = (props: IDeleteDirectorDialogProps) => {
 };
 
 interface IDeleteDirectorDialogProps {
-  onClose: () => void;
   id: number;
+  onClose: () => void;
+  onDeleted: () => void;
 }
 
 export default DeleteDirectorDialog;

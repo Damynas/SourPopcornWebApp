@@ -6,7 +6,7 @@ import { HttpStatus } from '../../constants';
 const confirmationMessage = 'Are you sure that you want to delete this user?';
 
 const DeleteUserDialog = (props: IDeleteUserDialogProps) => {
-  const { onClose, id } = props;
+  const { id, onClose, onDeleted } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -19,7 +19,7 @@ const DeleteUserDialog = (props: IDeleteUserDialogProps) => {
   if (deleteUser.response) {
     if (deleteUser.response.status === HttpStatus.NO_CONTENT) {
       openSnackbar('User Deleted Successfully');
-      onClose();
+      onDeleted();
     }
     deleteUser.clearResponse();
   }
@@ -48,6 +48,7 @@ const DeleteUserDialog = (props: IDeleteUserDialogProps) => {
 
 interface IDeleteUserDialogProps {
   onClose: () => void;
+  onDeleted: () => void;
   id: number;
 }
 

@@ -6,7 +6,7 @@ import { HttpStatus } from '../../constants';
 const confirmationMessage = 'Are you sure that you want to delete this movie?';
 
 const DeleteMovieDialog = (props: IDeleteMovieDialogProps) => {
-  const { onClose, id } = props;
+  const { id, onClose, onDeleted } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -19,7 +19,7 @@ const DeleteMovieDialog = (props: IDeleteMovieDialogProps) => {
   if (deleteMovie.response) {
     if (deleteMovie.response.status === HttpStatus.NO_CONTENT) {
       openSnackbar('Movie Deleted Successfully');
-      onClose();
+      onDeleted();
     }
     deleteMovie.clearResponse();
   }
@@ -47,8 +47,9 @@ const DeleteMovieDialog = (props: IDeleteMovieDialogProps) => {
 };
 
 interface IDeleteMovieDialogProps {
-  onClose: () => void;
   id: number;
+  onClose: () => void;
+  onDeleted: () => void;
 }
 
 export default DeleteMovieDialog;

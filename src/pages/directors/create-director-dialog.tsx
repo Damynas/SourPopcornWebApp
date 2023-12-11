@@ -8,7 +8,11 @@ import {
   validateDate
 } from '../../utils';
 import { HttpStatus } from '../../constants';
-import { type IFormValue, type IApiErrorResponse } from '../../common';
+import {
+  type IFormValue,
+  type IApiErrorResponse,
+  type IDirectorDto
+} from '../../common';
 
 const initialForm = {
   name: {
@@ -26,7 +30,7 @@ const initialForm = {
 };
 
 const CreateDirectorDialog = (props: ICreateDirectorDialogProps) => {
-  const { onClose } = props;
+  const { onClose, onCreated } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -72,7 +76,7 @@ const CreateDirectorDialog = (props: ICreateDirectorDialogProps) => {
   if (createDirector.response) {
     if (createDirector.response.status === HttpStatus.CREATED_AT_ROUTE) {
       openSnackbar('Director Created Successfully');
-      onClose();
+      onCreated(createDirector.response.data.resource);
     }
     createDirector.clearResponse();
   }
@@ -201,6 +205,7 @@ const CreateDirectorDialog = (props: ICreateDirectorDialogProps) => {
 
 interface ICreateDirectorDialogProps {
   onClose: () => void;
+  onCreated: (director: IDirectorDto) => void;
 }
 
 export default CreateDirectorDialog;

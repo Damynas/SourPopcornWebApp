@@ -73,7 +73,11 @@ const DirectorListPage = () => {
 
   const onCreateDirectorFormDialogClose = () => {
     changeCreateDirectorFormDialogState();
-    getDirectors(apiData.requestConfig);
+  };
+
+  const onDirectorCreated = (director: IDirectorDto) => {
+    setDirectors([...directors, director]);
+    onCreateDirectorFormDialogClose();
   };
 
   const [editDirectorFormDialogOpen, setEditDirectorFormDialogOpen] =
@@ -90,7 +94,14 @@ const DirectorListPage = () => {
   const onEditDirectorFormDialogClose = () => {
     setDirectorId(null);
     changeEditDirectorFormDialogState();
-    getDirectors(apiData.requestConfig);
+  };
+
+  const onDirectorEdited = (director: IDirectorDto) => {
+    const updatedDirectors = directors.map((u) =>
+      u.id === director.id ? director : u
+    );
+    setDirectors(updatedDirectors);
+    onEditDirectorFormDialogClose();
   };
 
   const [deleteDirectorConfirmDialogOpen, setDeleteDirectorConfirmDialogOpen] =
@@ -107,7 +118,12 @@ const DirectorListPage = () => {
   const onDeleteDirectorConfirmDialogClose = () => {
     setDirectorId(null);
     changeDeleteDirectorConfirmDialogState();
-    getDirectors(apiData.requestConfig);
+  };
+
+  const onDirectorDeleted = () => {
+    const updatedDirectors = directors.filter((u) => u.id !== directorId);
+    setDirectors(updatedDirectors);
+    onDeleteDirectorConfirmDialogClose();
   };
 
   const renderHeader = () => {
@@ -204,18 +220,23 @@ const DirectorListPage = () => {
         {renderHeader()}
         {renderBody()}
         {createDirectorFormDialogOpen && (
-          <CreateDirectorDialog onClose={onCreateDirectorFormDialogClose} />
+          <CreateDirectorDialog
+            onClose={onCreateDirectorFormDialogClose}
+            onCreated={onDirectorCreated}
+          />
         )}
         {editDirectorFormDialogOpen && directorId && (
           <EditDirectorDialog
             id={directorId}
             onClose={onEditDirectorFormDialogClose}
+            onEdited={onDirectorEdited}
           />
         )}
         {deleteDirectorConfirmDialogOpen && directorId && (
           <DeleteDirectorDialog
             id={directorId}
             onClose={onDeleteDirectorConfirmDialogClose}
+            onDeleted={onDirectorDeleted}
           />
         )}
       </Table>

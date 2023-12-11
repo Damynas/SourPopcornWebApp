@@ -9,6 +9,7 @@ import {
 } from '../../utils';
 import { HttpStatus } from '../../constants';
 import {
+  type IMovieDto,
   type IApiErrorResponse,
   type IDirectorDto,
   type IFormValue
@@ -54,7 +55,7 @@ const initialForm = {
 };
 
 const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
-  const { directors, onClose } = props;
+  const { directors, onClose, onCreated } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -175,7 +176,7 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
   if (createMovie.response) {
     if (createMovie.response.status === HttpStatus.CREATED_AT_ROUTE) {
       openSnackbar('Movie Created Successfully');
-      onClose();
+      onCreated(createMovie.response.data.resource);
     }
     createMovie.clearResponse();
   }
@@ -494,6 +495,7 @@ const CreateMovieDialog = (props: ICreateMovieDialogProps) => {
 interface ICreateMovieDialogProps {
   directors: IDirectorDto[];
   onClose: () => void;
+  onCreated: (movie: IMovieDto) => void;
 }
 
 export default CreateMovieDialog;

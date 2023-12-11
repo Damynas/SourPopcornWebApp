@@ -57,7 +57,7 @@ const initialForm = {
 };
 
 const EditMovieDialog = (props: IEditMovieDialogProps) => {
-  const { id, directors, onClose } = props;
+  const { id, directors, onClose, onEdited } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -259,7 +259,7 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
   if (editMovie.response) {
     if (editMovie.response.status === HttpStatus.OK) {
       openSnackbar('Movie Updated Successfully');
-      onClose();
+      onEdited(editMovie.response.data.resource);
     }
     editMovie.clearResponse();
   }
@@ -597,6 +597,7 @@ interface IEditMovieDialogProps {
   id: number;
   directors: IDirectorDto[];
   onClose: () => void;
+  onEdited: (movie: IMovieDto) => void;
 }
 
 export default EditMovieDialog;

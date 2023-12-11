@@ -33,7 +33,7 @@ const initialForm = {
 const roles = [UserRole.USER, UserRole.MODERATOR, UserRole.ADMIN];
 
 const EditUserDialog = (props: IEditUserDialogProps) => {
-  const { onClose, id } = props;
+  const { onClose, onEdited, id } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -186,7 +186,7 @@ const EditUserDialog = (props: IEditUserDialogProps) => {
   if (editUser.response) {
     if (editUser.response.status === HttpStatus.OK) {
       openSnackbar('User Updated Successfully');
-      onClose();
+      onEdited(editUser.response.data.resource);
     }
     editUser.clearResponse();
   }
@@ -331,6 +331,7 @@ const EditUserDialog = (props: IEditUserDialogProps) => {
 
 interface IEditUserDialogProps {
   onClose: () => void;
+  onEdited: (user: IUserDto) => void;
   id: number;
 }
 

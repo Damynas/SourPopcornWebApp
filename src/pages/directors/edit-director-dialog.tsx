@@ -32,7 +32,7 @@ const initialForm = {
 };
 
 const EditDirectorDialog = (props: IEditDirectorDialogProps) => {
-  const { onClose, id } = props;
+  const { id, onClose, onEdited } = props;
 
   const { apiData, openSnackbar } = useContext(DataContext) as IDataContext;
 
@@ -131,7 +131,7 @@ const EditDirectorDialog = (props: IEditDirectorDialogProps) => {
   if (editDirector.response) {
     if (editDirector.response.status === HttpStatus.OK) {
       openSnackbar('Director Updated Successfully');
-      onClose();
+      onEdited(editDirector.response.data.resource);
     }
     editDirector.clearResponse();
   }
@@ -275,8 +275,9 @@ const EditDirectorDialog = (props: IEditDirectorDialogProps) => {
 };
 
 interface IEditDirectorDialogProps {
-  onClose: () => void;
   id: number;
+  onClose: () => void;
+  onEdited: (director: IDirectorDto) => void;
 }
 
 export default EditDirectorDialog;

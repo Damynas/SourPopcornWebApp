@@ -106,7 +106,11 @@ const MovieListPage = () => {
 
   const onCreateMovieFormDialogClose = () => {
     changeCreateMovieFormDialogState();
-    getMovies(apiData.requestConfig);
+  };
+
+  const onMovieCreated = (movie: IMovieDto) => {
+    setMovies([...movies, movie]);
+    onCreateMovieFormDialogClose();
   };
 
   const [editMovieFormDialogOpen, setEditMovieFormDialogOpen] =
@@ -123,7 +127,12 @@ const MovieListPage = () => {
   const onEditMovieFormDialogClose = () => {
     setMovieId(null);
     changeEditMovieFormDialogState();
-    getMovies(apiData.requestConfig);
+  };
+
+  const onMovieEdited = (movie: IMovieDto) => {
+    const updatedMovies = movies.map((m) => (m.id === movie.id ? movie : m));
+    setMovies(updatedMovies);
+    onEditMovieFormDialogClose();
   };
 
   const [deleteMovieConfirmDialogOpen, setDeleteMovieConfirmDialogOpen] =
@@ -140,7 +149,12 @@ const MovieListPage = () => {
   const onDeleteMovieConfirmDialogClose = () => {
     setMovieId(null);
     changeDeleteMovieConfirmDialogState();
-    getMovies(apiData.requestConfig);
+  };
+
+  const onMovieDeleted = () => {
+    const updatedMovies = movies.filter((m) => m.id !== movieId);
+    setMovies(updatedMovies);
+    onDeleteMovieConfirmDialogClose();
   };
 
   const renderHeader = () => {
@@ -255,6 +269,7 @@ const MovieListPage = () => {
           <CreateMovieDialog
             directors={directors}
             onClose={onCreateMovieFormDialogClose}
+            onCreated={onMovieCreated}
           />
         )}
         {editMovieFormDialogOpen && movieId && (
@@ -262,12 +277,14 @@ const MovieListPage = () => {
             id={movieId}
             directors={directors}
             onClose={onEditMovieFormDialogClose}
+            onEdited={onMovieEdited}
           />
         )}
         {deleteMovieConfirmDialogOpen && movieId && (
           <DeleteMovieDialog
             id={movieId}
             onClose={onDeleteMovieConfirmDialogClose}
+            onDeleted={onMovieDeleted}
           />
         )}
       </Table>
