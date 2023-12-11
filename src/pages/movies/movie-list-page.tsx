@@ -147,13 +147,13 @@ const MovieListPage = () => {
     return (
       <TableHeader>
         <TableRow>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='left' width='100px'>
             Title
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='left' width='400px'>
             Description
           </TableCell>
-          <TableCell variant='head' align='left' width='200px'>
+          <TableCell variant='head' align='left' width='100px'>
             Director
           </TableCell>
           <TableCell variant='head' align='right' width='100px'>
@@ -184,17 +184,14 @@ const MovieListPage = () => {
             key={movie.id}
             onClick={() => navigate(`/movies/${movie.id}`)}
           >
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='left' width='100px'>
               {movie.title}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
+            <TableCell variant='body' align='left' width='400px'>
               {movie.description}
             </TableCell>
-            <TableCell variant='body' align='left' width='200px'>
-              {
-                directors.find((director) => director.id === movie.directorId)
-                  ?.name
-              }
+            <TableCell variant='body' align='left' width='100px'>
+              {movie.director?.name}
             </TableCell>
             <TableCell variant='body' align='right' width='100px'>
               {movie.sourPopcorns}

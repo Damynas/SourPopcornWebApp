@@ -104,7 +104,7 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
           errorMessage: ''
         },
         directorId: {
-          value: movie.directorId.toString(),
+          value: movie.director.id.toString(),
           errorMessage: ''
         },
         country: {
@@ -415,7 +415,7 @@ const EditMovieDialog = (props: IEditMovieDialogProps) => {
       movie?.title !== form.title.value ||
       movie?.description !== form.description.value ||
       movie?.posterLink !== form.posterLink.value ||
-      movie?.directorId.toString() !== form.directorId.value ||
+      movie?.director?.id.toString() !== form.directorId.value ||
       movie?.country !== form.country.value ||
       formatDate(movie?.releasedOn) !== form.releasedOn.value ||
       movie?.writers !==
